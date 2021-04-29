@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+    ></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"
+    ></script>  
+    <title>영역 내보내기 as image</title>
+    <style>
+    #image__{
+        width: 640px;
+        padding: 20px;
+        color: white;
+        background-color: orange;
+    }
+    </style>
+</head>
+<body>
+    <div id="image__">
+    <h1>내보내고 싶은 영역</h1>
+    <p>자식 요소들이 다수 포함되어 있다</p>
+    <p>과연 잘 될까?</p>
+    </div>
+    <button id="exportBtn">내보내기</button>
+    <script>
+        document.getElementById('exportBtn').onclick = function(){
+    domtoimage.toBlob(document.getElementById('image__'))
+    .then(function (blob) {
+        window.saveAs(blob, 'image__.png');
+    });
+}
+    </script>
+</body>
+</html>
