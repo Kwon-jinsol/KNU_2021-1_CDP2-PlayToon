@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/psd.js/2.0.0/psd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/psd.js/2.0.0/psd.js"></script>
+  <title>psd.js example for divide layers</title>
+</head>
+
+<style>
+  body {
+    background: green;
+  }
+
+  p {
+    border: 1px solid red;
+    width: 160px;
+  }
+
+  div {
+    float: left;
+  }
+  .line {
+    float: none;
+    width: 100px;
+    height: 30px;
+    border: 1px solid gold;
+  }
+  .timeline {
+    width: 500px;
+    height: 200px;
+    border: 1px solid blue;
+    margin: 20px;
+  }
+  .img-title {
+    text-align: center;
+    display: table;
+    border: 1px solid #cecece;
+    width: 280px;
+    height: 250px;
+  }
+
+  .img-div {
+    display: table-cell;
+    vertical-align: middle;
+  } 
+  
+  .ImgCon {
+    max-width: 200px;
+    max-height: 200px;
+    background-size: cover;
+    border: 1px solid black;
+    resize: both;
+    overflow: scroll;
+  }
+</style>
+
+<body>
+  <div style="float: none;">
+  <input type="file" name="" id="file">
+  </div>
+  <form class="fileForm">
+    <div class="fileInfo"></div>
+  </form>
+  <div class="timeline"></div>
+  <div class="img-title">
+    <div class="img-div">
+      <!--<div class="ImgCon" id="ImageContainer"></div>-->
+    </div>
+  </div>
+  <div id=""></div>
+  <div></div>
+  <script>
+    var $file = document.getElementById("file");
+
+   // console.log(file);
+    var Info = document.querySelector(".fileInfo");
+    var Timeline = document.querySelector(".timeline");
+    var ImgDiv = document.querySelector(".img-div");
+    var PSD = require('psd');
+    // Load from URL
+    PSD.fromURL("./timeline-psd.psd").then(function (psd) {
+      node = psd.tree().descendants();
+      
+      //psd.layers[1].image.toPng('./output.png');  
+      for(let i = 0; i < node.length; i++) {
+        if(node[i].get('type') != 'group') {
+          Info.innerHTML += "<p>" + node[i].name + "</p>";
+          Timeline.innerHTML += "<div class='line'>" + "</div>";
+          ImgDiv.innerHTML += "<div class='ImgCon' id= 'ImageContainer" + i + "'>" + "</div>";
+          if(node[i].width != 0)
+            document.getElementById('ImageContainer'+ i).appendChild(node[i].toPng());
+          console.log(node[i].name);
+          console.log(node[i].width);
+        }
+      }
+        
+        console.log(psd.tree().export());
+    });
+    
+    // Load from event, e.g. drag & drop
+    function onDrop(evt) {
+      PSD.fromEvent(evt).then(function (psd) {
+        console.log(psd.tree().export());
+      });
+    }
+  </script>
+</body>
