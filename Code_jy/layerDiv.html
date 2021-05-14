@@ -54,33 +54,84 @@
     resize: both;
     overflow: scroll;
   }
+  .dropzone {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    border: 1px solid blueviolet;
+  }
 </style>
 
 <body>
   <div style="float: none;">
-  <input type="file" name="" id="file">
+    <input type="file" name="" id="file" accept=".psd">
   </div>
   <form class="fileForm">
-    <div class="fileInfo"></div>
+    <div class="fileInfo"><strong>fileInfo</strong></div>
   </form>
-  <div class="timeline"></div>
+  <div class="timeline"><strong>timeline</strong></div>
   <div class="img-title">
+    <strong>img-title</strong>
     <div class="img-div">
       <!--<div class="ImgCon" id="ImageContainer"></div>-->
     </div>
   </div>
-  <div id=""></div>
-  <div></div>
+  <div class="dropzone" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+    <strong>dropzone</strong>
+    <script>
+    var $file = document.getElementById("file");
+    var Info = document.querySelector(".fileInfo");
+    var Timeline = document.querySelector(".timeline");
+    var ImgDiv = document.querySelector(".img-div");
+    var dropZone = document.querySelector(".dropzone");
+    var PSD = require('psd');
+
+    
+    function dragover_handler(ev) {
+        ev.preventDefault();
+        // dropEffect를 move로 설정.
+        ev.dataTransfer.dropEffect = "move";
+      }
+
+      // Load from event, e.g. drag & drop
+    function drop_handler(ev) {
+      ev.preventDefault();
+      PSD.fromEvent(ev).then(function (psd) {
+        node = psd.tree().descendants();
+      //psd.layers[1].image.toPng('./output.png');  
+        for (let i = 0; i < node.length; i++) {
+          if (node[i].get('type') != 'group') {
+            Info.innerHTML += "<p>" + node[i].name + "</p>";
+            Timeline.innerHTML += "<div class='line'>" + "</div>";
+            ImgDiv.innerHTML += "<div class='ImgCon' id= 'ImageContainer" + i + "'>" + "</div>";
+            if (node[i].width != 0)
+            document.getElementById('ImageContainer' + i).appendChild(node[i].toPng());
+            console.log(node[i].name);
+            console.log(node[i].width);
+          }
+        }
+
+          console.log(psd.tree().export());
+      });
+
+      var dt = ev.dataTransfer
+      var files = dt.files;
+      for (let i = 0; i < files.length; i++){
+        dropZone.innerHTML += "<p>" + files[i].name + "</p>"
+      }
+    }
+    </script>
+  </div>
+  <!--Load from URL
   <script>
     var $file = document.getElementById("file");
-
-   // console.log(file);
     var Info = document.querySelector(".fileInfo");
     var Timeline = document.querySelector(".timeline");
     var ImgDiv = document.querySelector(".img-div");
     var PSD = require('psd');
+    
     // Load from URL
-    PSD.fromURL("./timeline-psd.psd").then(function (psd) {
+    PSD.fromURL(PSD/FILE/PATH).then(function (psd) {
       node = psd.tree().descendants();
       
       //psd.layers[1].image.toPng('./output.png');  
@@ -99,11 +150,6 @@
         console.log(psd.tree().export());
     });
     
-    // Load from event, e.g. drag & drop
-    function onDrop(evt) {
-      PSD.fromEvent(evt).then(function (psd) {
-        console.log(psd.tree().export());
-      });
-    }
   </script>
+  -->
 </body>
