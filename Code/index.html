@@ -6,12 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!--  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
-    <script src="./leftright.js"></script>
-    <link rel="stylesheet" href="bar_style.css">
-    <!--  -->
     <script src="jquery-3.6.0.min.js"></script>
     <script src="jquery.splitter.js"></script>
     <script src="jquery.feight.js"></script>
@@ -19,19 +13,6 @@
     <link rel="stylesheet" href="zeta-menu.css">
 
     <style>
-        /*  */
-        .drop-zone {
-            width: 500px;
-            height: 500px;
-            background-color: rgb(40, 148, 148)
-        }
-
-        .drop-zone-dragenter,
-        .drop-zone-dragover {
-            border: 10px solid rgb(202, 238, 73);
-        }
-
-        /*  */
         .frame {
             background-color: antiquewhite;
             font-size: 30px;
@@ -126,170 +107,24 @@
         <div class="frame">
             <div class="top">
                 <div class="top_section_1">top_section_1
-                    <a href="timeline.html">timeline test page</a>
                 </div>
                 <div class="top_section_2">top_section_2</div>
                 <div class="top_section_3">
                     top_section_3
-                    <!--  -->
-                    <div>
-                        <img id="myimage" height="200">
-                    </div>
-                    <!--  -->
                 </div>
             </div>
             <div class="bottom">
                 <div class="bottom_section_1">
-                    bottom_section_1
-                    <!--  -->
-                    <form id="dropzone">
-                        <input type="file" id="file" multiple onchange="onFileSelected(event)">
-
-                        <div class="drop-zone">
-                            또는 파일을 여기로 드래그하세요.
-                        </div>
-
-
-
-                    </form>
-                    <!--  -->
+                    bottom_section_
                 </div>
                 <div class="bottom_section_2">
                     <!-- bottom_section_2 -->
-                    <!--  -->
-                    <!-- <div slider id="slider-distance">
-                        <div>
-                          <div inverse-left style="width:70%;"></div>
-                          <div inverse-right style="width:70%;"></div>
-                          <div range style="left:0%;right:0%;"></div>
-                          <span thumb style="left:0%;"></span>
-                          <span thumb style="left:100%;"></span>
-                          <div sign style="left:0%;">
-                            <span id="value">0</span>
-                          </div>
-                          <div sign style="left:100%;">
-                            <span id="value">100</span>
-                          </div>
-                        </div>
-                        <input type="range" value="0" max="100" min="0" step="1" oninput="
-                        this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
-                        let value = (this.value/parseInt(this.max))*100
-                        var children = this.parentNode.childNodes[1].childNodes;
-                        children[1].style.width=value+'%';
-                        children[5].style.left=value+'%';
-                        children[7].style.left=value+'%';children[11].style.left=value+'%';
-                        children[11].childNodes[1].innerHTML=this.value;" />
-                      
-                        <input type="range" value="100" max="100" min="0" step="1" oninput="
-                        this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
-                        let value = (this.value/parseInt(this.max))*100
-                        var children = this.parentNode.childNodes[1].childNodes;
-                        children[3].style.width=(100-value)+'%';
-                        children[5].style.right=(100-value)+'%';
-                        children[9].style.left=value+'%';children[13].style.left=value+'%';
-                        children[13].childNodes[1].innerHTML=this.value;" />
-                      </div> -->
-
                       <iframe class=timeline_frame src="timeline.html"></iframe>
-                    <!--  -->
                 </div>
             </div>
         </div>
     </div>
-    <script src="leftright.js"></script>
     <script>
-        // 
-        (function () {
-
-            var $file = document.getElementById("file")
-            var dropZone = document.querySelector(".drop-zone")
-
-            var toggleClass = function (className) {
-
-                console.log("current event: " + className)
-
-                var list = ["dragenter", "dragleave", "dragover", "drop"]
-
-                for (var i = 0; i < list.length; i++) {
-                    if (className === list[i]) {
-                        dropZone.classList.add("drop-zone-" + list[i])
-                    } else {
-                        dropZone.classList.remove("drop-zone-" + list[i])
-                    }
-                }
-            }
-
-            var showFiles = function (files) {
-                dropZone.innerHTML = ""
-                for (var i = 0, len = files.length; i < len; i++) {
-                    dropZone.innerHTML += "<p>" + files[i].name + "</p>"
-                    dropZone.innerHTML += files[i].size + "byte"
-                }
-
-            }
-
-            var selectFile = function (files) {
-                // input file 영역에 드랍된 파일들로 대체
-                $file.files = files
-                showFiles($file.files)
-
-            }
-
-            $file.addEventListener("change", function (e) {
-                showFiles(e.target.files)
-            })
-
-            // 드래그한 파일이 최초로 진입했을 때
-            dropZone.addEventListener("dragenter", function (e) {
-                e.stopPropagation()
-                e.preventDefault()
-
-                toggleClass("dragenter")
-
-            })
-
-            // 드래그한 파일이 dropZone 영역을 벗어났을 때
-            dropZone.addEventListener("dragleave", function (e) {
-                e.stopPropagation()
-                e.preventDefault()
-
-                toggleClass("dragleave")
-
-            })
-
-            // 드래그한 파일이 dropZone 영역에 머물러 있을 때
-            dropZone.addEventListener("dragover", function (e) {
-                e.stopPropagation()
-                e.preventDefault()
-
-                toggleClass("dragover")
-
-            })
-
-            // 드래그한 파일이 드랍되었을 때
-            dropZone.addEventListener("drop", function (e) {
-                e.preventDefault()
-
-                toggleClass("drop")
-
-                var files = e.dataTransfer && e.dataTransfer.files
-                console.log(files)
-
-                if (files != null) {
-                    if (files.length < 1) {
-                        alert("폴더 업로드 불가")
-                        return
-                    }
-                    selectFile(files)
-                } else {
-                    alert("ERROR")
-                }
-
-            })
-
-        })();
-
-        // 
 
         // 전체 화면 플러그인 (feight, fullscreen)
         $('.frame').feight();
