@@ -1,5 +1,5 @@
 .zeta-menu-bar {
-    background: hotpink;
+    background: rgb(218, 218, 218);
     display: inline-block;
     width: 100%;
   }
@@ -9,10 +9,10 @@
     list-style:none;
     position: relative;
   }
-  .zeta-menu li:hover { background: white; }
-  .zeta-menu li:hover>a { color: hotpink;  }
+  .zeta-menu li:hover { background: rgb(89, 131, 248); }
+  .zeta-menu li:hover>a { color: rgb(255, 255, 255);  }
   .zeta-menu a {
-    color: white;
+    color: rgb(5, 0, 54);
     display: block;
     padding: 10px 20px;
     text-decoration: none;

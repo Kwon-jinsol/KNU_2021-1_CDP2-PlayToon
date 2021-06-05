@@ -5,7 +5,7 @@ var LayoutConstants = {
 	LINE_HEIGHT: 26,
 	DIAMOND_SIZE: 10,
 	MARKER_TRACK_HEIGHT: 60,
-	width: 600,
+	width: 1000,
 	height: 200,
 	TIMELINE_SCROLL_HEIGHT: 0,
 	LEFT_PANE_WIDTH: 250,

@@ -20,7 +20,7 @@ import { ScrollBar } from './ui/scrollbar.js'
 import { DataStore } from './utils/util_datastore.js'
 import { DockingWindow } from './utils/docking_window.js'
 
-var Z_INDEX = 999;
+var Z_INDEX = -1;
 
 function LayerProp(name) {
 	this.name = name;
@@ -420,14 +420,14 @@ function Timeliner(target) {
 		top: '22px'
 	});
 
-	var pane = document.createElement('div');
+	var pane = document.createElement('div1');
 
 	style(pane, {
 		position: 'fixed',
 		top: '20px',
 		left: '20px',
 		margin: 0,
-		border: '1px solid ' + Theme.a,
+		border: '1px solid ' + Theme.d,
 		padding: 0,
 		overflow: 'hidden',
 		backgroundColor: Theme.a,
@@ -751,6 +751,8 @@ function Timeliner(target) {
 		layers.push(layer);
 
 		layer_panel.setState(layer_store);
+
+		repaintAll()
 	}
 
 	this.addLayer = addLayer;
@@ -807,6 +809,7 @@ function Timeliner(target) {
 	pane_title.addEventListener('mouseout', function() {
 		widget.allowMove(false);
 	});
+	
 }
 
 

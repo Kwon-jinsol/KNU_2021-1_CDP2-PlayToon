@@ -321,9 +321,9 @@ function DockingWindow(pane, ghostpane) {
 			top = 0
 			break;
 		case SNAP_BOTTOM_EDGE:
-			width = window.innerWidth;
+			width = window.innerWidth - 300;
 			height = window.innerHeight / 3;
-			left = 0
+			left = 300 
 			top = window.innerHeight - height
 			break;
 		case SNAP_DOCK_BOTTOM:
@@ -390,7 +390,8 @@ function DockingWindow(pane, ghostpane) {
 		document.addEventListener('touchend', onTouchEnd);
 
 		bounds = pane.getBoundingClientRect();
-		snapType = SNAP_DOCK_BOTTOM;
+		// snapType = SNAP_DOCK_BOTTOM;
+		snapType = SNAP_BOTTOM_EDGE;
 
 		// use setTimeout as a hack to get diemensions correctly! :(
 		setTimeout(() => resizeEdges());

@@ -13,6 +13,10 @@ function LayerView(layer, dispatcher) {
 	var label = document.createElement('span');
 
 	label.style.cssText = 'font-size: 12px; padding: 4px;';
+	label.style.width = '10'
+	label.style.overflow = 'hidden';
+	label.style.whiteSpace = 'nowrap';
+	label.style.textOverflow = 'ellipsis';
 
 	label.addEventListener('click', function(e) {
 		// context.dispatcher.fire('label', channelName);
@@ -131,6 +135,7 @@ function LayerView(layer, dispatcher) {
 		borderBottom: '1px solid ' + Theme.b,
 		top: 0,
 		left: 0,
+		width: '100%',
 		height: (LayoutConstants.LINE_HEIGHT - 1 ) + 'px',
 		color: Theme.c
 	});
