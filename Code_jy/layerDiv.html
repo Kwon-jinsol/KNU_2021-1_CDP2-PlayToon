@@ -9,7 +9,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/konva/7.2.5/konva.min.js"></script>
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <title>psd.js example for divide layers</title>
+  <title>PlayToon-Editor</title>
+  <link rel="shortcut icon" type="image/x-icon" href="icons/icon.ico">
 </head>
 
 <style>
@@ -20,6 +21,7 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+    margin: 0;
   }
 
   body::-webkit-scrollbar {
@@ -27,12 +29,12 @@
     /* Chrome, Safari, Opera*/
   }
 
-  img {
+  /* img {
     width: auto;
     height: auto;
     max-width: 400px;
     max-height: 400px;
-  }
+  } */
 
   p {
     border: 1px solid red;
@@ -59,17 +61,76 @@
     margin: 20px;
   }
 
+  .widget-field {
+    position: absolute;
+    top: 63px;
+    left: 1503px;
+    width: 415px;
+    height: 587px;
+    /* background-color:burlywood; */
+    border-bottom: 3px solid #535353;
+    overflow-y: scroll;
+  }
+
+  .widget-title {
+    position: fixed;
+    padding-left: 10px;
+    width: 100%;
+    background-color: #b8b8b8;
+    font-weight: bold;
+    z-index: 100;
+  }
+
+  .widget {
+    position: relative;
+    margin: 20px;
+    /* top: 20px;
+    left: 20px; */
+    width: 370px;
+    height: 230px;
+    background-color: #85827a;
+  }
+
+  .temp {
+    position: relative;
+    /* top: 200px;
+    left: 200px; */
+    width: 2000px;
+    height: 1200px;
+  }
+
+  .img-field{
+    width: 1500px;
+    height: 587px;
+    /* background-color: pink; */
+    border-right: 3px solid #535353;
+    border-bottom: 3px solid #535353;
+    overflow: scroll;
+    /* resize: none; */
+  }
+
   .img-title {
     text-align: center;
-    display: table;
-    background-color: #cecece;
-    border: 1px solid #cecece;
-    width: 280px;
-    height: 250px;
+    /* display: table; */
+    background-color: #ffffff;
+    border: 3px solid #cecece;
+    width: 1300px;
+    /* height: 250px; */
+    position: relative;
+    top: 20px;
+    left: 60px;
+  }
+
+  .img-panel {
+    width: 100%;
+    /* height: 25px; */
+    background-color: #b8b8b8;
+    text-align: center;
+    font-weight: bold;
   }
 
   .img-div {
-    display: table-cell;
+    /* display: table-cell; */
     vertical-align: middle;
   }
 
@@ -96,6 +157,7 @@
     border-top: 1px solid #d6d6d6;
     border-right: 1px solid #d6d6d6;
     overflow-y: scroll;
+    z-index: -1;
   }
 
   strong {
@@ -130,10 +192,12 @@
     background-color: rgba(19, 19, 19, 0.33);
   }
 
+
   .directory-list {
     padding: 10px;
     /* padding-top: 20px; */
     margin: 0px
+
   }
 
   .directory-list ul {
@@ -210,9 +274,147 @@
     background-position: center top;
     background-size: 75% auto;
   }
+
+  /* nav */
+  .nav {
+    background-color: #cecece;
+    width: 100%;
+    height: 60px;
+    border-bottom: 3px solid #535353;
+  }
+
+  .nav_item {
+    /* background-color: rgb(252, 126, 126); */
+    /* color: white; */
+    width: 50px;
+    height: 100%;
+    font-size: 10px;
+    text-align: center;
+    /* margin-left: 15px; */
+  }
+
+  .nav_item:hover {
+    background-color: rgb(167, 167, 167);
+  }
+
+  .gap {
+    height: 100%;
+    width: 20px;
+  }
+
+  img {
+    z-index: 999;
+    width: 40px;
+    margin-top: 3px;
+    /* -webkit-filter: opacity(.5) drop-shadow(0 0 0 gray); */
+    /* filter: opacity(.5) drop-shadow(0 0 0 white); */
+    /* filter: hue-rotate(100deg); */
+  }
+
 </style>
 
 <body>
+  <div class="nav">
+    <div class="gap"></div>
+    <div class="nav_item new_project">
+      <img src="icons/030-note.png" alt="">
+      새 프로젝트
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item load_project">
+      <img src="icons/019-folder.png" alt="">
+      불러오기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item save">
+      <img src="icons/020-floppy disk.png" alt="">
+      저장하기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item import">
+      <img src="icons/import.png" alt="">
+      가져오기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item export">
+      <img src="icons/export.png" alt="">
+      내보내기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item cloud">
+      <img src="icons/cloud.png" alt="">
+      클라우드
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item move">
+      <img src="icons/pointer.png" alt="">
+      이동
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item rotate">
+      <img src="icons/refresh.png" alt="">
+      회전
+    </div>
+
+    <div class="gap"></div>
+    <div class="nav_item size">
+      <img src="icons/013-control.png" alt="">
+      크기조절
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item hand">
+      <img src="icons/hello.png" alt="">
+      손바닥
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item zoom">
+      <img src="icons/search.png" alt="">
+      돋보기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item cut-scene">
+      <img src="icons/comic-book.png" alt="">
+      컷나누기
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item speech-bubble">
+      <img src="icons/conversation.png" alt="">
+      말풍선
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item load">
+      <img src="icons/text-box.png" alt="">
+      텍스트
+    </div>
+    <!-- 
+      <img src="icons/" alt=""> 
+    -->
+    <div class="gap"></div>
+    <div class="nav_item effect">
+      <img src="icons/star.png" alt=""> 
+      효과
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item change">
+      <img src="icons/picture-1.png" alt=""> 
+      화면전환
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item sound">
+      <img src="icons/speaker-1.png" alt=""> 
+      사운드
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item undo">
+      <img src="icons/undo.png" alt=""> 
+      실행취소
+    </div>
+    <div class="gap"></div>
+    <div class="nav_item redo">
+      <img src="icons/redo.png" alt=""> 
+      재개
+    </div>
+  </div>
   <div class="dropzone type2" ondrop="file_drop_handler(event)" ondragover="dragover_handler(event)">
     <strong>File list</strong>
     <hr>
@@ -222,12 +424,28 @@
   <div class="fileInfo" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"><strong>fileInfo</strong>
   </div>
   <!-- <div class="timeline"><strong>timeline</strong></div> -->
-  <div class="img-title">
-    <strong>img-title</strong>
-    <div class="img-div" id="img-div">
-      <!--<div class="ImgCon" id="ImageContainer"></div>-->
+
+  <div class="img-field type2">
+    <div class="img-title">
+      <!-- <strong>img-title</strong> -->
+      <div class="img-panel">
+        Image Panel
+      </div>
+      <div class="img-div" id="img-div">
+        <!--<div class="ImgCon" id="ImageContainer"></div>-->
+      </div>
     </div>
+    <div class="temp"></div>
   </div>
+
+  <div class="widget-field type2">
+    <div class="widget-title">Widget Field</div>
+    <div class="widget"></div>
+    <div class="widget"></div>
+    <div class="widget"></div>
+  </div>
+
+  
 
   <!-- timeline -->
   <script type="module">
@@ -464,13 +682,13 @@
 
   <!--konva.js for canvas control-->
   <script>
-    var width = window.innerWidth - 300;
-    var height = window.innerHeight - 400;
+    var width = window.innerWidth - 600;
+    var height = window.innerHeight - 450;
 
     var stage = new Konva.Stage({
       container: 'img-div',
-      width: width,
-      height: height,
+      width: 1300,
+      height: 500,
     });
     function drawImage(imageObj) {
       var layer = new Konva.Layer();
